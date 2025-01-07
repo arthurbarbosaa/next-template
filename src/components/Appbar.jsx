@@ -22,6 +22,18 @@ const Appbar = () => {
       >
         Admin Dashboard
       </Link>
+      <Link
+        className="text-gray-800 hover:text-sky-400 transition-colors"
+        href={"/premium"}
+      >
+        Pagina Paga
+      </Link>
+      <Link
+        className="text-gray-800 hover:text-sky-400 transition-colors"
+        href={"/pricing"}
+      >
+        Preços
+      </Link>
 
       <SigninButton />
     </header>

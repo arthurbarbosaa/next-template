@@ -43,6 +43,7 @@ model User {
   role          String?
   accounts      Account[]
   sessions      Session[]
+  payments      Payment[]
 }
 
 model VerificationToken {
@@ -51,4 +52,23 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  amount          Float
+  currency        String
+  status          PaymentStatus
+  stripePaymentId String        @unique
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
 }
