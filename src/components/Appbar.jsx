@@ -1,42 +1,68 @@
-import SigninButton from "./SigninButton";
-import Link from "next/link";
+"use client";
+
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+} from "@nextui-org/react";
+import { signOut } from "next-auth/react";
 
 const Appbar = () => {
-  return (
-    <header className="flex gap-4 p-4 bg-gradient-to-b from-white to-gray-200 shadow ">
-      <Link
-        className="text-gray-800 hover:text-sky-400 transition-colors"
-        href={"/"}
-      >
-        Home
-      </Link>
-      <Link
-        className="text-gray-800 hover:text-sky-400 transition-colors"
-        href={"/profile"}
-      >
-        User Profile
-      </Link>
-      <Link
-        className="text-gray-800 hover:text-sky-400 transition-colors"
-        href={"/admin"}
-      >
-        Admin Dashboard
-      </Link>
-      <Link
-        className="text-gray-800 hover:text-sky-400 transition-colors"
-        href={"/premium"}
-      >
-        Pagina Paga
-      </Link>
-      <Link
-        className="text-gray-800 hover:text-sky-400 transition-colors"
-        href={"/pricing"}
-      >
-        Preços
-      </Link>
+  const menuItems = [
+    {
+      label: "App",
+      href: "/app",
+    },
+    {
+      label: "Perfil",
+      href: "/app/profile",
+    },
+    {
+      label: "Painel Admin",
+      href: "/app/admin",
+    },
+    {
+      label: "Página Paga",
+      href: "/app/premium",
+    },
+  ];
 
-      <SigninButton />
-    </header>
+  return (
+    <Navbar position="static" isBordered className="bg-default-50">
+      <NavbarBrand>
+        <p className="font-bold text-inherit">Template</p>
+      </NavbarBrand>
+
+      <NavbarContent justify="center">
+        {menuItems.map((item, index) => (
+          <NavbarItem key={`${item.href}-${index}`}>
+            <Link
+              color="foreground"
+              href={item.href}
+              className="text-lg"
+              size="lg"
+            >
+              {item.label}
+            </Link>
+          </NavbarItem>
+        ))}
+      </NavbarContent>
+
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <Button
+            color="danger"
+            variant="flat"
+            onPress={() => signOut({ callbackUrl: "/" })}
+          >
+            Sair
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
   );
 };
 

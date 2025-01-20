@@ -6,7 +6,7 @@ export default withAuth(
     const token = req.nextauth.token;
 
     // Verifica rotas que precisam de pagamento
-    if (req.nextUrl.pathname.startsWith("/premium")) {
+    if (req.nextUrl.pathname.startsWith("/app/premium")) {
       try {
         const paymentCheck = await fetch(
           `${process.env.NEXTAUTH_URL}/api/payment/status`,
@@ -29,7 +29,8 @@ export default withAuth(
     }
 
     // Verifica rotas de admin
-    if (req.nextUrl.pathname.startsWith("/admin")) {
+    if (req.nextUrl.pathname.startsWith("/app/admin")) {
+      console.log(token);
       return token?.role === "admin"
         ? NextResponse.next()
         : NextResponse.redirect(new URL("/unauthorized", req.url));
@@ -39,11 +40,14 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token,
+      authorized: ({ token }) => !!token, // Garantindo que apenas usuários autenticados passem
+    },
+    pages: {
+      signIn: "/login", // Define a página de login personalizada
     },
   }
 );
 
 export const config = {
-  matcher: ["/admin/:path*", "/premium/:path*", "/profile", "/pricing"],
+  matcher: ["/app/:path*"],
 };

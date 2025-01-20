@@ -1,0 +1,15 @@
+/* Estilos personalizados para a página de login */
+.signin-btn {
+  @apply w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg;
+  @apply transition-colors duration-200;
+}
+
+.signin-btn-google {
+  @apply bg-white text-gray-700 border border-gray-300;
+  @apply hover:bg-gray-50;
+}
+
+.signin-btn-github {
+  @apply bg-[#24292F] text-white;
+  @apply hover:bg-[#24292F]/90;
+}

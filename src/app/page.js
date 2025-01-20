@@ -1,11 +1,21 @@
-import PaymentButton from "@/components/PaymentButton";
-import Link from "next/link";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Demo from "@/components/Demo";
+import Pricing from "@/components/Pricing";
+import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main>
-      <h1>Landing Page</h1>
-      <PaymentButton></PaymentButton>
-    </main>
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <Demo />
+        <Pricing />
+        <FAQ />
+      </main>
+      <Footer />
+    </>
   );
 }

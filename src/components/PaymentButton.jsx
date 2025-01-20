@@ -1,6 +1,8 @@
 "use client";
 
+import { Button } from "@nextui-org/button";
 import { useState } from "react";
+import { Icon } from "@iconify/react";
 
 export default function PaymentButton({ priceId }) {
   const [loading, setLoading] = useState(false);
@@ -29,12 +31,14 @@ export default function PaymentButton({ priceId }) {
   };
 
   return (
-    <button
-      onClick={handlePayment}
+    <Button
+      color="default"
+      onPress={handlePayment}
       disabled={loading}
-      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+      isLoading={loading}
+      startContent={!loading && <Icon icon="material-symbols:payment" />}
     >
       {loading ? "Processando..." : "Comprar Agora"}
-    </button>
+    </Button>
   );
 }
