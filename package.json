@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:services:webhook": "npm run services:up && concurrently \"npm run dev\" \"npm run prisma:studio\" \"npm run stripe:webhook:up\"",
+    "postdev:services:webhook": "npm run services:stop",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -15,6 +17,7 @@
     "prisma:push": "dotenv -e .env.development -- npx prisma db push",
     "prisma:generate": "dotenv -e .env.development -- npx prisma generate",
     "prisma:migrate": "dotenv -e .env.development -- npx prisma migrate dev",
+    "stripe:webhook:up": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
     "postinstall": "dotenv -e .env.development -- npx prisma generate && dotenv -e .env.development npx prisma migrate deploy"
   },
   "prisma": {
@@ -35,6 +38,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
+    "concurrently": "^9.1.2",
     "dotenv-cli": "^8.0.0",
     "eslint": "^9.17.0",
     "eslint-config-next": "15.1.3",
