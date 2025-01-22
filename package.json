@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:services:webhook": "npm run services:up && concurrently \"npm run dev\" \"npm run prisma:studio\" \"npm run stripe:webhook:up\"",
-    "postdev:services:webhook": "npm run services:stop",
+    "dev:all": "npm run services:up && concurrently \"npm run dev\" \"npm run prisma:studio\" \"npm run stripe:webhook:up\"",
+    "postdev:all": "npm run services:stop",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
