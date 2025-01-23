@@ -20,9 +20,6 @@
     "stripe:webhook:up": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
     "postinstall": "dotenv -e .env.development -- npx prisma generate && dotenv -e .env.development npx prisma migrate deploy"
   },
-  "prisma": {
-    "seed": "node prisma/seed.js"
-  },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
     "@iconify/react": "^5.2.0",
