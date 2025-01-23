@@ -27,8 +27,8 @@ export async function POST(req) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXTAUTH_URL}/api/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXTAUTH_URL}/`,
+      success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXTAUTH_URL}/pricing`,
       metadata: {
         userId: session.user.id,
       },
