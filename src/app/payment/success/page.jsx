@@ -59,7 +59,7 @@ export default function PaymentSuccessPage() {
           Agora você tem acesso completo a nossa plataforma.
         </p>
 
-        <Button as={Link} color="default" href="/app">
+        <Button as={Link} color="default" href="/app/premium">
           Acessar o App
         </Button>
       </div>

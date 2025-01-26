@@ -1,3 +1,4 @@
+import { getToken } from "next-auth/jwt";
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
@@ -30,7 +31,6 @@ export default withAuth(
 
     // Verifica rotas de admin
     if (req.nextUrl.pathname.startsWith("/app/admin")) {
-      console.log(token);
       return token?.role === "admin"
         ? NextResponse.next()
         : NextResponse.redirect(new URL("/unauthorized", req.url));
@@ -49,5 +49,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/app/:path*"],
+  matcher: ["/app/:path*", "/payment/success"],
 };

@@ -10,7 +10,9 @@ export default function LoginPage() {
 
   const handleSignIn = async (provider) => {
     setIsLoading(true);
-    await signIn(provider, { callbackUrl: "/app" });
+    const callbackUrl =
+      new URLSearchParams(window.location.search).get("callbackUrl") || "/app";
+    await signIn(provider, { callbackUrl });
   };
 
   return (

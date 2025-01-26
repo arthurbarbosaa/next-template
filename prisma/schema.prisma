@@ -57,7 +57,7 @@ model VerificationToken {
 model Payment {
   id              String        @id @default(cuid())
   userId          String
-  user            User          @relation(fields: [userId], references: [id])
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   amount          Float
   currency        String
   status          PaymentStatus

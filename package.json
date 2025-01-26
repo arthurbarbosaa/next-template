@@ -13,10 +13,10 @@
     "services:stop": "docker compose -f compose.yaml stop",
     "services:down": "docker compose -f compose.yaml down",
     "prisma:studio": "dotenv -e .env.development -- npx prisma studio",
-    "prisma:seed": "dotenv -e .env.development -- npx prisma db seed",
     "prisma:push": "dotenv -e .env.development -- npx prisma db push",
     "prisma:generate": "dotenv -e .env.development -- npx prisma generate",
-    "prisma:migrate": "dotenv -e .env.development -- npx prisma migrate dev",
+    "prisma:migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev",
+    "prisma:migrate:deploy": "dotenv -e .env.development -- npx prisma migrate deploy",
     "stripe:webhook:up": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
     "postinstall": "dotenv -e .env.development -- npx prisma generate && dotenv -e .env.development npx prisma migrate deploy"
   },
