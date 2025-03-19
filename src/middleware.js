@@ -1,53 +1,49 @@
-import { getToken } from "next-auth/jwt";
-import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import authConfig from "./auth.config";
+import NextAuth from "next-auth";
 
-export default withAuth(
-  async function middleware(req) {
-    const token = req.nextauth.token;
+const { auth } = NextAuth(authConfig);
 
-    // Verifica rotas que precisam de pagamento
-    if (req.nextUrl.pathname.startsWith("/app/premium")) {
-      try {
-        const paymentCheck = await fetch(
-          `${process.env.NEXTAUTH_URL}/api/payment/status`,
-          {
-            headers: {
-              Cookie: req.headers.get("cookie") || "",
-            },
-          }
-        );
-
-        const { hasPaid } = await paymentCheck.json();
-
-        if (!hasPaid) {
-          return NextResponse.redirect(new URL("/pricing", req.url));
-        }
-      } catch (error) {
-        console.error("Erro ao verificar pagamento:", error);
-        return NextResponse.redirect(new URL("/error", req.url));
-      }
-    }
-
-    // Verifica rotas de admin
-    if (req.nextUrl.pathname.startsWith("/app/admin")) {
-      return token?.role === "admin"
-        ? NextResponse.next()
-        : NextResponse.redirect(new URL("/unauthorized", req.url));
-    }
-
+export default async function middleware(req) {
+  if (req.nextUrl.pathname.startsWith("/webhooks/stripe")) {
     return NextResponse.next();
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => !!token, // Garantindo que apenas usuários autenticados passem
-    },
-    pages: {
-      signIn: "/login", // Define a página de login personalizada
-    },
   }
-);
+
+  const session = await auth();
+
+  if (!session) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  if (req.nextUrl.pathname.startsWith("/app")) {
+    try {
+      const paymentCheck = await fetch(
+        `${process.env.NEXTAUTH_URL}/api/payment/status`,
+        {
+          headers: { Cookie: req.headers.get("cookie") || "" },
+        }
+      );
+      const { hasPaid } = await paymentCheck.json();
+
+      if (!hasPaid) {
+        return NextResponse.redirect(new URL("/pricing", req.url));
+      }
+    } catch (error) {
+      console.error(error);
+      return NextResponse.redirect(new URL("/error", req.url));
+    }
+  }
+
+  // Proteção para rotas de admin
+  if (req.nextUrl.pathname.startsWith("/app/admin")) {
+    return session?.user?.role === "admin"
+      ? NextResponse.next()
+      : NextResponse.redirect(new URL("/unauthorized", req.url));
+  }
+
+  return NextResponse.next();
+}
 
 export const config = {
-  matcher: ["/app/:path*", "/payment/success"],
+  matcher: ["/app/:path*", "/payment/success", "/pricing"],
 };
