@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { Card, CardBody, Button, Spinner } from "@nextui-org/react";
+import { Card, CardBody, Button, Spinner } from "@heroui/react";
 import Image from "next/image";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import Link from "next/link";

@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { Card, CardBody, CardHeader, Button } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 

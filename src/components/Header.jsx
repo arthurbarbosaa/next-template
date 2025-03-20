@@ -7,7 +7,10 @@ import {
   NavbarItem,
   Link,
   Button,
-} from "@nextui-org/react";
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from "@heroui/react";
 import { useEffect } from "react";
 
 const Header = () => {

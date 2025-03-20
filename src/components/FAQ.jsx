@@ -1,7 +1,6 @@
 "use client";
 
-import { Accordion, AccordionItem } from "@nextui-org/accordion";
-import { Card } from "@nextui-org/react";
+import { Card, Accordion, AccordionItem } from "@heroui/react";
 
 const faqData = [
   {

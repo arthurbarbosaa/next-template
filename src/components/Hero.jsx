@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Avatar, AvatarGroup } from "@nextui-org/react";
+import { Button, Avatar, AvatarGroup } from "@heroui/react";
 import { Icon } from "@iconify/react";
 
 export default function Hero() {

@@ -1,7 +1,7 @@
 "use client";
 
 import PaymentButton from "./PaymentButton";
-import { Card } from "@nextui-org/react";
+import { Card } from "@heroui/react";
 
 export default function Pricing() {
   return (

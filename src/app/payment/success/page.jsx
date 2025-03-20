@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button, Link } from "@nextui-org/react";
+import { Button, Link } from "@heroui/react";
 import ReactConfetti from "react-confetti";
 
 export default function PaymentSuccessPage() {
