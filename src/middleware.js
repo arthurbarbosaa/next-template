@@ -15,7 +15,7 @@ export default async function middleware(req) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  if (req.nextUrl.pathname.startsWith("/app")) {
+  if (req.nextUrl.pathname.startsWith("/app/premium")) {
     try {
       const paymentCheck = await fetch(
         `${process.env.NEXTAUTH_URL}/api/payment/status`,
