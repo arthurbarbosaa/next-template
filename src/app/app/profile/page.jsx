@@ -1,15 +1,17 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { Card, CardBody, Button, Spinner } from "@heroui/react";
-import Image from "next/image";
-import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import Link from "next/link";
+import Image from "next/image";
+import { Icon } from "@iconify/react";
+import { useSession } from "next-auth/react";
+import { usePaymentStatus } from "@/hooks/usePaymentStatus";
+import { Card, CardBody, Button, Spinner } from "@heroui/react";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
   const { isLoading, hasPaid, error } = usePaymentStatus();
   const user = session?.user;
+  console.log(session);
 
   if (!session) {
     return (
@@ -33,17 +35,22 @@ export default function ProfilePage() {
           <CardBody className="gap-8">
             <div className="flex items-center gap-4">
               <div className="relative w-20 h-20 rounded-full overflow-hidden">
-                <Image
-                  src={user?.image}
-                  alt={user?.name || "Avatar"}
-                  fill
-                  className="object-cover"
-                  sizes="80px"
-                />
+                {user?.image ? (
+                  <Image
+                    src={user.image}
+                    alt={user.name || "Avatar"}
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
+                ) : (
+                  <Icon icon="solar:user-linear" className="w-full h-full" />
+                )}
               </div>
               <div>
-                <h2 className="text-2xl font-bold">{user?.name}</h2>
-                <p className="text-default-600">{user?.email}</p>
+                <h2 className="text-2xl font-bold">
+                  {user?.name || user?.email}
+                </h2>
               </div>
             </div>
 
@@ -97,11 +104,25 @@ export default function ProfilePage() {
                 <div className="space-y-2">
                   <div className="flex justify-between py-2 border-b">
                     <span className="text-default-600">Autenticação</span>
-                    <span>Google</span>
+                    <span>
+                      {session.user?.provider?.charAt(0).toUpperCase() +
+                        session.user?.provider?.slice(1)}
+                    </span>
                   </div>
                   <div className="flex justify-between py-2 border-b">
-                    <span className="text-default-600">Último Acesso</span>
-                    <span>{new Date().toLocaleDateString()}</span>
+                    <span className="text-default-600">Criado em</span>
+                    <span>
+                      {session.user?.createdAt
+                        ? new Date(session.user?.createdAt).toLocaleDateString(
+                            "pt-BR",
+                            {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            }
+                          )
+                        : "Data não disponível"}
+                    </span>
                   </div>
                 </div>
               </div>

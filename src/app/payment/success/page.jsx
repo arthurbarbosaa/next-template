@@ -33,7 +33,7 @@ export default function PaymentSuccessPage() {
         height={windowDimension.height}
         recycle={false}
         numberOfPieces={700}
-        gravity={0.1}
+        gravity={1.4}
       />
       <div className="text-center">
         <div className="mb-8">
