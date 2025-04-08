@@ -32,8 +32,8 @@ export default function PaymentSuccessPage() {
         width={windowDimension.width}
         height={windowDimension.height}
         recycle={false}
-        numberOfPieces={700}
-        gravity={1.4}
+        numberOfPieces={800}
+        gravity={0.8}
       />
       <div className="text-center">
         <div className="mb-8">

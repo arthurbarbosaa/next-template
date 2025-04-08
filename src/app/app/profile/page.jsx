@@ -11,7 +11,6 @@ export default function ProfilePage() {
   const { data: session } = useSession();
   const { isLoading, hasPaid, error } = usePaymentStatus();
   const user = session?.user;
-  console.log(session);
 
   if (!session) {
     return (

@@ -2,7 +2,8 @@
 
 import { Card, CardBody, CardHeader } from "@heroui/react";
 import ButtonGoogleLogin from "@/components/ButtonGoogleLogin";
-import FormMagicLink from "@/components/FormMagicLink";
+import FormMagicLinkLogin from "@/components/FormMagicLinkLogin";
+import FormCredentialsLogin from "@/components/FormCredentialsLogin";
 
 export default function LoginPage() {
   return (
@@ -22,7 +23,8 @@ export default function LoginPage() {
                 <span className="bg-content1 px-4 text-default-600">ou</span>
               </div>
             </div>
-            <FormMagicLink />
+            <FormMagicLinkLogin />
+            <FormCredentialsLogin />
             <p className="text-center text-sm opacity-60 mt-8">
               Ao fazer login, você concorda com os{" "}
               <a href="/terms-of-service" className="hover:underline">

@@ -1,13 +1,7 @@
 import Google from "next-auth/providers/google";
-import Resend from "next-auth/providers/resend";
 
 const authConfig = {
-  providers: [
-    Google,
-    Resend({
-      from: "next-template@boilersaas.com.br",
-    }),
-  ],
+  providers: [Google],
   pages: {
     signIn: "/login",
   },

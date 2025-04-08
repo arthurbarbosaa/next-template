@@ -1,7 +1,7 @@
-import { auth } from "@/auth";
+import { auth } from "../auth/[...nextauth]/route";
+import { NextResponse } from "next/server";
 import stripe from "@/lib/stripe";
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
