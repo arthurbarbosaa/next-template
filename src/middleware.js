@@ -5,10 +5,6 @@ import NextAuth from "next-auth";
 const { auth } = NextAuth(authConfig);
 
 export default auth(async function middleware(req) {
-  if (req.nextUrl.pathname.startsWith("/webhooks/stripe")) {
-    return NextResponse.next();
-  }
-
   const session = await auth();
 
   if (!session) {
@@ -34,7 +30,6 @@ export default auth(async function middleware(req) {
     }
   }
 
-  // Proteção para rotas de admin
   if (req.nextUrl.pathname.startsWith("/app/admin")) {
     return session?.user?.role === "admin"
       ? NextResponse.next()
@@ -45,6 +40,5 @@ export default auth(async function middleware(req) {
 });
 
 export const config = {
-  runtime: "nodejs",
   matcher: ["/app/:path*", "/payment/success", "/pricing"],
 };

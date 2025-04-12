@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { useSession } from "next-auth/react";
+import Loading from "@/app/app/profile/loading";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import { Card, CardBody, Button, Spinner } from "@heroui/react";
 
@@ -13,12 +14,9 @@ export default function ProfilePage() {
   const user = session?.user;
 
   if (!session) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Spinner size="xl" />
-      </div>
-    );
+    return <Loading />;
   }
+  console.log(session);
 
   return (
     <div className="container mx-auto px-4 py-24">
@@ -72,7 +70,7 @@ export default function ProfilePage() {
                       Status da Assinatura
                     </span>
                     {isLoading ? (
-                      <span>Carregando...</span>
+                      <Spinner size="sm" />
                     ) : error ? (
                       <span className="text-danger">{error}</span>
                     ) : (
@@ -103,10 +101,7 @@ export default function ProfilePage() {
                 <div className="space-y-2">
                   <div className="flex justify-between py-2 border-b">
                     <span className="text-default-600">Autenticação</span>
-                    <span>
-                      {session.user?.provider?.charAt(0).toUpperCase() +
-                        session.user?.provider?.slice(1)}
-                    </span>
+                    <span className="capitalize">{session.user?.provider}</span>
                   </div>
                   <div className="flex justify-between py-2 border-b">
                     <span className="text-default-600">Criado em</span>

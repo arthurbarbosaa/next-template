@@ -1,5 +1,3 @@
-"use client";
-
 import VerifyRequest from "@/components/VerifyRequest";
 import { Suspense } from "react";
 

@@ -9,6 +9,7 @@ const authConfig = {
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
+        token.role = user.role;
         token.createdAt = user.createdAt;
       }
       if (account) {
@@ -17,8 +18,9 @@ const authConfig = {
       return token;
     },
     async session({ session, token }) {
-      session.user.provider = token.provider;
       session.user.id = token.id;
+      session.user.role = token.role;
+      session.user.provider = token.provider;
       session.user.createdAt = token.createdAt;
       return session;
     },

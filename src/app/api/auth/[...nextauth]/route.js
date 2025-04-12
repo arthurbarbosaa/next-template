@@ -42,6 +42,7 @@ export const { auth, handlers } = NextAuth({
       if (user) {
         token.id = user.id;
         token.createdAt = user.createdAt;
+        token.role = user.role;
       }
       if (account) {
         token.provider = account.provider;
@@ -49,8 +50,9 @@ export const { auth, handlers } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      session.user.provider = token.provider;
       session.user.id = token.id;
+      session.user.role = token.role;
+      session.user.provider = token.provider;
       session.user.createdAt = token.createdAt;
       return session;
     },

@@ -1,5 +1,3 @@
-"use client";
-
 export default function Demo() {
   return (
     <section id="demo" className="py-24 bg-default-50">
